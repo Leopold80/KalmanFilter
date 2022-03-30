@@ -4,7 +4,6 @@
 
 namespace Kalman {
 	template <int _a, int _b>
-	//using Matf = Eigen::Matrix<float, _a, _b, Eigen::RowMajor>;
 	using Matf = Eigen::Matrix<float, _a, _b>;
 	using MatXf = Matf<Eigen::Dynamic, Eigen::Dynamic>;
 
