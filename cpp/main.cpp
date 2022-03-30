@@ -6,8 +6,8 @@
 
 int main() {
 	/*
-	* ¿¨¶ûÂüÂË²¨Ê¾Àı³ÌĞò
-	* ±àĞ´ÁËÒ»¸öÄ¿±ê¼ì²âËã·¨µÄ¿¨¶ûÂüÂË²¨Àà
+	* å¡å°”æ›¼æ»¤æ³¢ç¤ºä¾‹ç¨‹åº
+	* ç¼–å†™äº†ä¸€ä¸ªç›®æ ‡æ£€æµ‹ç®—æ³•çš„å¡å°”æ›¼æ»¤æ³¢ç±»
 	*/
 	ObjectTracker kf(1, 1, 1, 1);
 	Kalman::Matf<8, 1> x0;
@@ -17,9 +17,9 @@ int main() {
 
 	for (size_t i = 0; i < 100; i++) {
 		kf.set_dt(1.);
-		Kalman::Matf<8, 1> xp =  kf.predit();  // ¼ÆËãÏÈÑé×´Ì¬ÏòÁ¿
-		Kalman::Matf<4, 1> z = xp.topLeftCorner<4, 1>();  // ½«ÏÈÑé×´Ì¬Á¿×÷Îª¹Û²âÖµ
-		Kalman::Matf<8, 1> x0 = kf.update(z, xp);  // ¼ÆËãºóÑé×´Ì¬Á¿
+		Kalman::Matf<8, 1> xp =  kf.predit();  // è®¡ç®—å…ˆéªŒçŠ¶æ€å‘é‡
+		Kalman::Matf<4, 1> z = xp.topLeftCorner<4, 1>();  // å°†å…ˆéªŒçŠ¶æ€é‡ä½œä¸ºè§‚æµ‹å€¼
+		Kalman::Matf<8, 1> x0 = kf.update(z, xp);  // è®¡ç®—åéªŒçŠ¶æ€é‡
 		Kalman::Matf<4, 1> x = x0.topLeftCorner<4, 1>();
 
 		std::cout << "************ " << i + 1 << " ************" << std::endl;
