@@ -6,7 +6,7 @@
 
 namespace Kalman {
 	/*
-	* ¶¯Ì¬ÀàÐÍ¿¨¶ûÂüÂË²¨ºËÐÄ²¿·Ö£¬³ý¶¯Ì¬Êý×éÍâÓëÕý³£¿¨¶ûÂüÂË²¨ÏàÍ¬¡£
+	* åŠ¨æ€ç±»åž‹å¡å°”æ›¼æ»¤æ³¢æ ¸å¿ƒéƒ¨åˆ†ï¼Œé™¤åŠ¨æ€æ•°ç»„å¤–ä¸Žæ­£å¸¸å¡å°”æ›¼æ»¤æ³¢ç›¸åŒã€‚
 	*/
 	template <>
 	struct KFCore<-1, -1> {
