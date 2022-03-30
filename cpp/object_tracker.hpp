@@ -10,15 +10,15 @@ constexpr auto dimx = 8;
 
 
 /*
-* ÓÃÀı
-* Ä¿±ê¼ì²âËã·¨ÓÃ¿¨¶ûÂüÂË²¨
-* ¹Û²âÁ¿Îªx1 y1 x2 y2£¨»òx y w h)
-* ×´Ì¬Á¿Îª¹Û²âÁ¿¼°Æä¶ÔÓ¦µÄËÙ¶È
+* ç”¨ä¾‹
+* ç›®æ ‡æ£€æµ‹ç®—æ³•ç”¨å¡å°”æ›¼æ»¤æ³¢
+* è§‚æµ‹é‡ä¸ºx1 y1 x2 y2ï¼ˆæˆ–x y w h)
+* çŠ¶æ€é‡ä¸ºè§‚æµ‹é‡åŠå…¶å¯¹åº”çš„é€Ÿåº¦
 */
 class ObjectTracker {
 private:
-	Kalman::KFCore<dimz, dimx>  _kf;  // ¿¨¶ûÂüÂË²¨ºËĞÄ
-	float t_prev;  // ÉÏÒ»´ÎÊ±¼ä
+	Kalman::KFCore<dimz, dimx>  _kf;  // å¡å°”æ›¼æ»¤æ³¢æ ¸å¿ƒ
+	float t_prev;  // ä¸Šä¸€æ¬¡æ—¶é—´
 public:
 	ObjectTracker(float q, float r, float p, float dt) {
 		this->_kf.Q = Kalman::Matf<dimx, dimx>::Identity() * q;
@@ -31,14 +31,14 @@ public:
 	}
 
 	/*
-	* ÉèÖÃ×´Ì¬×ªÒÆ¾ØÕóÖĞdt
+	* è®¾ç½®çŠ¶æ€è½¬ç§»çŸ©é˜µä¸­dt
 	*/
 	void set_dt(float dt) {
 		this->_kf.A.topRightCorner<dimz, dimz>() = Kalman::Matf<dimz, dimz>::Identity() * dt;
 	}
 
 	/*
-	* ³õÊ¼»¯ºóÑé×´Ì¬¾ØÕó
+	* åˆå§‹åŒ–åéªŒçŠ¶æ€çŸ©é˜µ
 	*/
 	void init_x0(Kalman::Ref<Kalman::Matf<dimx, 1>> x0) {
 		this->_kf.x = x0;
