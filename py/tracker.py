@@ -1,30 +1,31 @@
-from kalman_core import KFCore
 import numpy as np
 
+from .kalman_core import KFCore
 
-class KFTracker:
-    dimx = 8
-    dimz = 4
+
+"""
+用于2d点的卡尔曼滤波实现，滤波时调用__call__即可
+"""
+
+
+class KalmanFilter(KFCore):
+    dimx = 4
+    dimz = 2
 
     def __init__(self, q, r, p, dt):
-        Q = np.identity(KFTracker.dimx) * q
-        R = np.identity(KFTracker.dimz) * r
-        P = np.identity(KFTracker.dimx) * p
-        A = np.identity(KFTracker.dimx)
-        H = np.zeros((KFTracker.dimz, KFTracker.dimx))
-        H[0:KFTracker.dimz, 0:KFTracker.dimz] = np.identity(KFTracker.dimz)
-        x0 = np.zeros((KFTracker.dimx, 1))
-        self._kf = KFCore(Q=Q, R=R, P=P, A=A, H=H, x=x0, dimx=KFTracker.dimx)
+        Q = np.identity(KalmanFilter.dimx) * q
+        R = np.identity(KalmanFilter.dimz) * r
+        P = np.identity(KalmanFilter.dimx) * p
+        A = np.identity(KalmanFilter.dimx)
+        H = np.zeros((KalmanFilter.dimz, KalmanFilter.dimx))
+        H[0:KalmanFilter.dimz, 0:KalmanFilter.dimz] = np.identity(KalmanFilter.dimz)
+        x0 = np.zeros((KalmanFilter.dimx, 1))
+
+        super(KalmanFilter, self).__init__(Q, R, P, A, H, x0, KalmanFilter.dimx)
         self.set_dt(dt)
 
     def set_dt(self, dt):
-        self._kf.A[0:4, 4:8] = np.identity(KFTracker.dimz) * dt
+        self.A[0:KalmanFilter.dimz, KalmanFilter.dimz:KalmanFilter.dimx] = np.identity(KalmanFilter.dimz) * dt
 
-    def init_x0(self, x0):
-        self._kf.x = x0
-
-    def predict(self):
-        return self._kf.predict()
-
-    def update(self, z, xp):
-        return self._kf.update(z, xp)
+    def set_x0(self, x0):
+        self.xp = x0
